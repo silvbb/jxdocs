@@ -1,7 +1,7 @@
 name: Deploy To Github Pages
 
 on:
-   #允许手动push触发
+  #允许手动push触发
   repository_dispatch:
     types:
       - deploy
@@ -21,7 +21,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
+          cache: "pnpm"
       - name: Install dependencies
         run: pnpm install --prod
 
@@ -36,6 +36,6 @@ jobs:
         with:
           deploy_key: ${{ secrets.SSH_PRIVATE_KEY }}
           publish_dir: docs/.vitepress/dist
-          external_repository: LetTTGACO/LetTTGACO.github.io
-          publish_branch: master
+          external_repository: silvbb/silvbb.github.io
+          publish_branch: jxdocs
           commit_message: ${{ github.event.head_commit.message }}
