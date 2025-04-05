@@ -5,6 +5,8 @@ on:
   repository_dispatch:
     types:
       - deploy
+  # 添加手动触发功能
+  workflow_dispatch:
 
 jobs:
   build:
