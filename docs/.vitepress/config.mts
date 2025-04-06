@@ -1,125 +1,92 @@
+// 在文件顶部添加立即执行的日志
+console.log(
+  "\x1b[42m%s\x1b[0m",
+  "\n========== console: 开始加载 VitePress 配置文件 ==========",
+);
+
 import { defineConfig } from "vitepress";
-import { genFeiShuSideBar, genFlowUsSideBar, genNotionSideBar, genYuqueSideBar } from "../../utils/route";
-import { FeiShuSVG, FlowUsSVG, NotionSVG, YuQueSVG } from "../../utils/assists";
-import { createWriteStream } from 'node:fs'
-import { resolve } from 'node:path'
-import { SitemapStream } from 'sitemap'
-import mathjax3 from 'markdown-it-mathjax3';
-const customElements = ['mjx-container'];
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
+import { head } from "./config/head";
+import { markdown } from "./config/markdown";
+import { themeConfig as JxthemeConfig } from "./config/theme";
 
-const links: any[] = []
+import UnoCSS from "unocss/vite";
 
+import { createWriteStream } from "node:fs";
+import { resolve } from "node:path";
+import { SitemapStream } from "sitemap";
+const customElements = ["mjx-container"];
+
+// 它的路径解析是相对于配置文件的位置，而不是相对于运行时的工作目录。
+
+const links: any[] = [];
+
+// 添加状态跟踪变量
+let isFirstTransform = true;
+
+import { debugPlugin } from "./plugins/debug-plugin";
+import { markdownPreprocessPlugin } from "./plugins/markdown-preprocess";
+
+/** 整个站点的配置defineConfig
+ *  分开几个小配置单独文件：
+ *  主题配置:JxthemeConfig 其中包含路由 侧边栏 导航栏 页脚等UI元素
+ *  head  HTML头部标签
+ *  markdown  Markdown解析配置
+ *
+ * */
 export default defineConfig({
-  lang: "zh-CN",
-  title: 'Elog',
-  description: 'doc for elog',
+  lang: "zh-Hans",
+  title: "铁骑的知识库",
+  description: "docs for Jxblog",
+  appearance: "dark", // 设置默认为暗黑模式
   lastUpdated: true,
   cleanUrls: true,
   ignoreDeadLinks: true,
-  head: [
-    ['meta', { name: 'theme-color', content: '#2a9d8f' }],
-    [
-      'script',
-      {
-        src: 'https://cdn.usefathom.com/script.js',
-        'data-site': 'AZBRSFGG',
-        'data-spa': 'auto',
-        defer: ''
-      }
-    ],
-    [
-      'link', { rel: 'icon', href: '/favicon.ico' }
-    ]
-  ],
-  markdown: {
-    headers: {
-      level: [0, 0]
-    },
-    config: (md) => {
-      md.use(require('markdown-it-task-lists'))
-      md.use(mathjax3);
-    }
-  },
+  head: head,
+  markdown: markdown,
   vue: {
     template: {
       compilerOptions: {
+        //当 Vue 在模板中遇到 <mjx-container> 标签时，它会将其视为普通的 HTML 自定义元素，而不是尝试将其解析为 Vue 组件
         isCustomElement: (tag) => customElements.includes(tag),
       },
     },
   },
+  vite: {
+    //通过 Vite 的插件 API 钩子（如 configResolved 和 transform ）在构建过程的不同阶段输出日志。
+    plugins: [debugPlugin(), UnoCSS(), markdownPreprocessPlugin()],
+    logLevel: "info",
+  },
   transformHtml: (_, id, { pageData }) => {
+    console.log("\n\n========== 开始 transformHtml ==========\n\n");
+    // 只在第一次调用时输出日志
+    if (isFirstTransform) {
+      console.log("开始处理 HTML 文件", "\x1b[36m");
+      isFirstTransform = false;
+    }
+
+    //生成网站的 sitemap.xml,Sitemap 是一个XML文件，它列出了网站上的所有页面，帮助搜索引擎更好地索引你的网站内容。
     if (!/[\\/]404\.html$/.test(id))
+      //是否是 404 页面,如果不是 404 页面，则将该页面的信息添加到 links 数组中
       links.push({
         // you might need to change this if not using clean urls mode
-        url: pageData.relativePath.replace(/((^|\/)index)?\.md$/, '$2'),
-        lastmod: pageData.lastUpdated
-      })
+        url: pageData.relativePath.replace(/((^|\/)index)?\.md$/, "$2"), //页面的相对路径
+        lastmod: pageData.lastUpdated, //页面的最后更新时间
+      });
   },
 
   buildEnd: ({ outDir }) => {
-    const sitemap = new SitemapStream({ hostname: 'https://elog.1874.cool/' })
-    const writeStream = createWriteStream(resolve(outDir, 'sitemap.xml'))
-    sitemap.pipe(writeStream)
-    links.forEach((link) => sitemap.write(link))
-    sitemap.end()
+    const sitemap = new SitemapStream({ hostname: "https://elog.1874.cool/" });
+    const writeStream = createWriteStream(resolve(outDir, "sitemap.xml"));
+    sitemap.pipe(writeStream);
+    links.forEach((link) => sitemap.write(link));
+    sitemap.end();
+    console.log("\x1b[42m%s\x1b[0m", "========== 构建结束 ==========");
   },
-  themeConfig: {
-    search: {
-      provider: 'local'
-    },
-    outline: [2,6],
-    nav: [
-      { text: 'Notion 版', link: '/notion/start', activeMatch: '/notion/' },
-      {
-        text: '其他版本',
-        items: [
-          { text: '语雀版(帐号密码方式)', link: '/yuque-pwd/start', activeMatch: '/yuque-pwd/' },
-          { text: '语雀版(Token方式)', link: '/yuque/start', activeMatch: '/yuque/' },
-          { text: 'FlowUs示例', link: '/flowus/flowus-example', activeMatch: '/flowus/' },
-          { text: '飞书示例', link: '/feishu/VULCdSLgxotcb1xLi1BcWwdPnVa', activeMatch: '/feishu/' },
-          { text: 'Outline示例', link: '/outline/axK11IQrhd', activeMatch: '/outline/' },
-          { text: 'WordPress站点示例', link: 'https://wordpress.1874.cool' },
-          { text: 'Halo站点示例', link: 'https://halo.1874.cool' },
-        ]
-      },
-      { text: 'Elog 开发计划', link: 'https://1874.notion.site/Elog-91dd2037c9c847e6bc90b712b124189c' },
-      { text: 'Elog 示例模版', link: 'https://1874.notion.site/9bac25294abc46cc822042e4a3b550a6' },
-      {
-        text: 'V0.14.7',
-        items: [
-          {
-            text: 'Changelog',
-            link: 'https://github.com/LetTTGACO/elog/releases'
-          }
-        ]
-      }
-    ],
-    siteTitle: 'Elog Docs', // 标题
-    sidebar: {
-      '/yuque/': genYuqueSideBar('/yuque'),
-      '/yuque-pwd/': genYuqueSideBar('/yuque-pwd'),
-      '/notion/': genNotionSideBar('/notion'),
-      '/flowus/': genFlowUsSideBar('/flowus'),
-      '/feishu/': genFeiShuSideBar('/feishu')
-    },
-    docFooter: {
-      prev: '上一篇',
-      next: '下一篇'
-    },
-    socialLinks: [
-      { icon: { svg: YuQueSVG }, link: "https://www.yuque.com/1874w/elog-docs" },
-      { icon: { svg: NotionSVG }, link: "https://1874.notion.site/0aa9217e5bcc46768bdae424fddcbc28" },
-      { icon: { svg: FeiShuSVG }, link: "https://yi0dk0huz70.feishu.cn/drive/folder/Z4AZfkm29l5KWSdsHbncmbbmnvc" },
-      { icon: { svg: FlowUsSVG }, link: "https://flowus.cn/1874/share/90398607-98f1-4ff0-873c-7c3ed526a55c" },
-      { icon: 'github', link: "https://github.com/LetTTGACO/elog" },
-    ],
-    footer: {
-      message: 'Powered by <a href="https://www.yuque.com/1874w/elog-docs" target="_blank">语雀</a> & <a href="https://1874.notion.site/0aa9217e5bcc46768bdae424fddcbc28?v=5d3ef173d4014115bb4c66601df8a8e5" target="_blank">Notion</a> & <a href="https://vitepress.dev" target="_blank">VitePress</a> with <a href="https://github.com/LetTTGACO/elog" target="_blank">Elog</a>',
-      copyright: 'Copyright © 2022-present'
-    },
-  }
-})
+  themeConfig: JxthemeConfig,
+});
 
-
+// 在文件底部添加
+// console.log(
+//   "\x1b[42m%s\x1b[0m",
+//   "\n\n========== VitePress 配置成功 ==========\n\n",
+// );

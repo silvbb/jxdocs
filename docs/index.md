@@ -1,37 +1,36 @@
 ---
 layout: home
-
-title: Elog 介绍
-titleTemplate: Elog 文档
+title: "JWisdom的智能体"
 
 hero:
-  name: Elog
-  text: 开放式跨平台博客解决方案
-  tagline: 随意组合写作平台(语雀/飞书/Notion/FlowUs/我来Wolai/Outline)和部署平台(Hexo/Vitepress/Halo/Confluence/WordPress等)
   image:
-    src: /logo.png
-    alt: VitePress
+    src: /logo.svg
+    alt: UnoCSS
+  name: JWisdom的智能体
+  text: 杰出 & 多维 & 智能体
+  tagline: 全面AI时代即将来临!
   actions:
     - theme: brand
       text: 快速开始
       link: /notion/start
     - theme: alt
       text: GitHub
-      link: https://github.com/LetTTGACO/elog
-    - theme: alt
-      text: 喂猫 ❤️
-      link: https://1874.cool/cats
+      link: https://github.com/silvbb
+
 features:
-  - icon: 📝
-    title: 多写作平台
-    details: 写作平台支持语雀/Notion/FlowUs/飞书/我来Wolai/Outline
-  - icon: 🚀
-    title: 多部署平台
-    details: 部署平台支持所有通过渲染本地 Markdown 文档生成静态站点的博客平台，以及Halo/Confluence/WordPress站点
-  - icon: 🌅
-    title: 多图床平台
-    details: 图片支持本地存储或上传到阿里云/腾讯云/Github/七牛云/又拍云；支持通过拓展配置注入密钥。
-  - icon: 📦
-    title: 多文档格式支持
-    details: 支持生成带Front Matter Markdown/支持代码高亮的HTML/适用于Confluence的wiki；支持自定义文档处理适配器。
+  - icon:
+      src: img/svg/focus.svg
+    title: 杰出
+    link: /
+    details: "杰出不是偶然，而是智能与创新的必然交汇。"
+  - icon:
+      src: img/svg/insight.svg
+    title: 多维度
+    link: /
+    details: "多维度思考是智能体最珍贵的礼物，它让我们超越了算法的局限。"
+  - icon:
+      src: img/svg/knowledge.svg
+    title: 智能体
+    link: /
+    details: "智能体不只是回应命令，更是预见需求。"
 ---
