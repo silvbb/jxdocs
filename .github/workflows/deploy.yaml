@@ -25,7 +25,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
       - name: Install dependencies
-        run: pnpm install --prod
+        run: pnpm install --no-frozen-lockfile
 
       - name: 生成静态文件
         env:
