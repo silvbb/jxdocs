@@ -47,6 +47,9 @@ importers:
       jquery:
         specifier: ^3.7.1
         version: 3.7.1
+      markdown-it-mathjax3:
+        specifier: ^4.3.2
+        version: 4.3.2
       markdown-it-task-lists:
         specifier: ^2.1.1
         version: 2.1.1
@@ -132,9 +135,6 @@ importers:
       markdown-it-footnote:
         specifier: ^3.0.3
         version: 3.0.3
-      markdown-it-mathjax3:
-        specifier: ^4.3.2
-        version: 4.3.2
       mermaid:
         specifier: 9.3.0
         version: 9.3.0
