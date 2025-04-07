@@ -26,6 +26,9 @@ let isFirstTransform = true;
 import { debugPlugin } from "./plugins/debug-plugin";
 import { markdownPreprocessPlugin } from "./plugins/markdown-preprocess";
 
+// 确保在所有环境中使用一致的 base 路径
+const base = "/"; // 本地开发和生产环境都使用根路径
+
 /** 整个站点的配置defineConfig
  *  分开几个小配置单独文件：
  *  主题配置:JxthemeConfig 其中包含路由 侧边栏 导航栏 页脚等UI元素
@@ -41,6 +44,7 @@ export default defineConfig({
   lastUpdated: true,
   cleanUrls: true,
   ignoreDeadLinks: true,
+  base: base, // 使用统一的 base 路径
   head: head,
   markdown: markdown,
   vue: {
