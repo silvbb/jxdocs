@@ -59,6 +59,9 @@ export default defineConfig({
     //通过 Vite 的插件 API 钩子（如 configResolved 和 transform ）在构建过程的不同阶段输出日志。
     plugins: [debugPlugin(), UnoCSS(), markdownPreprocessPlugin()],
     logLevel: "info",
+    build: {
+      assetsInlineLimit: 0, // 禁用小资源内联，确保所有资源都作为单独的文件
+    },
   },
   transformHtml: (_, id, { pageData }) => {
     console.log("\n\n========== 开始 transformHtml ==========\n\n");
