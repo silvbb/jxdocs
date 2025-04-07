@@ -2,8 +2,10 @@
 title: vscode
 urlname: XDdudsfGXo5mxJxQbMnc80WOnFh
 date: '2025-04-05 01:00:40'
-updated: '2025-04-07 00:55:56'
+updated: '2025-04-07 01:07:43'
 ---
+# VsCode
+官方文档：
 ## 1，查看 VSCode 插件占用空间和内存的方法
 VSCode 提供了内置的性能分析工具：
 

@@ -2,8 +2,9 @@
 title: 微信weapp-vite
 urlname: E5HAdchwaoz7VJx6He7cCpPonIc
 date: '2025-03-26 10:20:32'
-updated: '2025-04-05 12:15:21'
+updated: '2025-04-07 01:09:38'
 ---
+# 微信开发者工具
 中文文档：https://vite.icebreaker.top/guide/
 
 `weapp-vite` 是一个 `vite` 的微信小程序版本的封装，你可以利用它开箱即用的进行小程序开发

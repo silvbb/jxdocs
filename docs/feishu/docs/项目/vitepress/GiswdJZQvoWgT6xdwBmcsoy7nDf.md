@@ -1,10 +1,11 @@
 ---
-title: vitepressBUG集
+title: vitepress BUG集
 urlname: GiswdJZQvoWgT6xdwBmcsoy7nDf
 date: '2025-03-18 20:26:48'
-updated: '2025-04-05 13:05:43'
+updated: '2025-04-07 01:09:08'
 ---
-
+# vitepress BUG集
+官方文档：
 ## 1,
 
 ### 2,vitepress 打包遇到windows为undefiend的问题

@@ -26,7 +26,7 @@
     "//docs:build": "set DEBUG=vitepress:* && set VITEPRESS_LOG=true && vitepress build docs",
     "docs:serve": "vitepress serve docs",
     "elog:init": "elog init -c elog.config.init.js -e .elog.init.env",
-    "local:feishu": "elog sync -c elog.config.feishu.js -e .elog.env  -a docs/feishu/elog.cache.feishu.json",
+    "local:feishu": "elog sync -c elog.config.feishu.cjs -e .elog.env  -a docs/feishu/elog.cache.feishu.json",
     "sync:feishu": "elog sync -c elog.config.feishu.js -a elog.cache.feishu.json",
     "local:feishu-wiki": "elog sync -c elog.config.feishu-wiki.js -e .elog.env  -a docs/feishu-wiki/elog.cache.feishu-wiki.json",
     "sync:feishu-wiki": "elog sync -c elog.config.feishu-wiki.js -a elog.cache.feishu-wiki.json",

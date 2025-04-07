@@ -2,8 +2,10 @@
 title: vitepress相关学习注意
 urlname: IG2IdTRSfoO08DxnSfLcYjcKn9e
 date: '2025-03-18 20:34:27'
-updated: '2025-04-06 21:40:42'
+updated: '2025-04-07 01:08:36'
 ---
+# vitepress相关学习注意
+官方文档：
 ## 1,onMounted函数
    onMounted(() => {}
 - 适用于同步操作

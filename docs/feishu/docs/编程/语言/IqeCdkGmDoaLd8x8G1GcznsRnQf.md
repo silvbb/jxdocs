@@ -2,8 +2,10 @@
 title: 'TypeScript '
 urlname: IqeCdkGmDoaLd8x8G1GcznsRnQf
 date: '2025-04-05 10:59:17'
-updated: '2025-04-06 16:35:16'
+updated: '2025-04-07 01:08:52'
 ---
+# TypeScript 
+官方文档：
 ## 1,index.d.ts 
 index.d.ts是 TypeScript 中的一种命名约定，它有特定的用途和意义：
 

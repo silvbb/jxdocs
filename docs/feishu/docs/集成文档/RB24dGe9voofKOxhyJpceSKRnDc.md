@@ -1,9 +1,10 @@
 ---
-title: Github操作
+title: Github
 urlname: RB24dGe9voofKOxhyJpceSKRnDc
 date: '2025-03-27 15:32:06'
-updated: '2025-04-04 23:11:14'
+updated: '2025-04-07 01:06:44'
 ---
+# Github官方文档
 https://docs.github.com/zh
 
 https://git-scm.com/book/zh/v2
@@ -89,7 +90,7 @@ git push -u origin master
 ```power
 git checkout -f #git checkout -f 的作用是将在暂存区的更改文件进行强制撤销。
 ```
-### 4，后续操作
+## 4，后续操作
 ```power
 git add .
 git commit -m "你的提交信息"
@@ -214,4 +215,11 @@ git clone --recursive <主仓库地址> .
 ```bash
 git submodule update --init --recursive
 ```
-## 
+## 8，删除提交历史
+```plaintext
+# 软重置 - 保留更改但取消提交
+git reset --soft HEAD~n  # n是要删除的提交数量
+
+# 或者硬重置 - 完全删除更改
+git reset --hard HEAD~n  # n是要删除的提交数量
+```

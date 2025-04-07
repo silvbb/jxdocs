@@ -2,8 +2,10 @@
 title: Javascript
 urlname: T80kdZPM0oIYzVxKY9ccmg5onof
 date: '2025-04-05 12:29:31'
-updated: '2025-04-06 12:54:11'
+updated: '2025-04-07 01:07:24'
 ---
+# Javascript
+官方文档：
 # 一，JS语法
 ## 1，解构赋值语法
 解构赋值 是 JavaScript 的语言特性，ECMAScript 6 (ES6) 引入的，所有现代 JavaScript 环境都支持，包括 Node.js。

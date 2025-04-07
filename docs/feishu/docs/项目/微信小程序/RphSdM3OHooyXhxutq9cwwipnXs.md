@@ -2,8 +2,10 @@
 title: 微信开发者工具
 urlname: RphSdM3OHooyXhxutq9cwwipnXs
 date: '2025-04-04 14:17:09'
-updated: '2025-04-05 01:50:29'
+updated: '2025-04-07 01:09:28'
 ---
+# 微信开发者工具
+官方文档：
 ## 1，微信小程序文件结构
 ```undefined
 miniprogram/
