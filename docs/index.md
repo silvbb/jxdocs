@@ -5,6 +5,7 @@ title: "JWisdom的智能体"
 hero:
   image:
     src: ./logo.svg
+    alt: UnoCSS
   name: JWisdom的智能体
   text: 杰出 & 多维 & 智能体
   tagline: 全面AI时代即将来临!
