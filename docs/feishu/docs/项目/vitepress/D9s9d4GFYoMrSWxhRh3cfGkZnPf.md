@@ -2,7 +2,7 @@
 title: JxDocs
 urlname: D9s9d4GFYoMrSWxhRh3cfGkZnPf
 date: '2025-04-05 22:03:58'
-updated: '2025-04-07 10:40:19'
+updated: '2025-04-07 10:42:39'
 ---
 # JxDocs
 网站：jxdocs.jwisdom.fun
@@ -32,7 +32,7 @@ elog 默认为增量更新，只有该文档重新修改过，再次同步时，
 elog --version #查看当前 Elog 的版本号
 elog sync 
 --debug #打印更多调试日志
---force #强制同步
---full-cache #缓存文档全部信息
+--force #强制同步 只支持文档删除时强制同步，不支持文档改名后删除改名前的文档
+--full-cache #缓存文档全部信息 常用于本地调试 使用此参数后，缓存文件的大小大约是原文档的2-10倍！
 --disable-cache 禁用缓存进行同步，等同于删除缓存文件进行全量更新
 ```
