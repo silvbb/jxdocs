@@ -36,7 +36,6 @@ import { markdownPreprocessPlugin } from "./plugins/markdown-preprocess";
 export default defineConfig({
   lang: "zh-Hans",
   title: "铁骑的知识库",
-  base: "/jxdocs/",
   description: "docs for Jxblog",
   appearance: "dark", // 设置默认为暗黑模式
   lastUpdated: true,
