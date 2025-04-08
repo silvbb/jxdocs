@@ -9,6 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
+  # 任务1: 部署 GitHub Pages
   build:
     runs-on: ubuntu-22.04
     strategy:
@@ -16,23 +17,27 @@ jobs:
         node-version: [20]
 
     steps:
+      # 1、检出源码
+      # 4、安装 PNPM
       - uses: actions/checkout@v4
       - name: Install pnpm
         uses: pnpm/action-setup@v4
+      # 4、安装 Node 环境
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
+      # 5、安装依赖
       - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
-
+        run: pnpm i --frozen-lockfile
+      # 6、打包
       - name: 生成静态文件
         env:
           YUQUE_TOKEN: ${{ secrets.YUQUE_TOKEN }}
         run: |
           pnpm run docs:build
-
+      # 7、部署 GitHub Pages  
       - name: 部署 到Github Pages
         uses: peaceiris/actions-gh-pages@v3
         with:

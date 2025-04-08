@@ -1,7 +1,6 @@
 ---
 layout: home
 title: "JWisdom的智能体"
-RAINBOW_ANIMATION: false
 
 hero:
   image:

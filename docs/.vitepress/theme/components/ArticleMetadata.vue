@@ -143,10 +143,14 @@
 import { reactive, toRefs, onMounted } from "vue";
 import { useData } from "vitepress";
 import md5 from "blueimp-md5";
-import dayjs from "dayjs";
+// 修改导入方式，使用动态导入
+import * as dayjsModule from "dayjs";
 import "dayjs/locale/zh-cn";
-import relativeTime from "dayjs/plugin/relativeTime";
+import * as relativeTimeModule from "dayjs/plugin/relativeTime";
 import { goToLink } from "../utils.ts";
+
+const dayjs = dayjsModule.default || dayjsModule;
+const relativeTime = relativeTimeModule.default || relativeTimeModule;
 
 dayjs.extend(relativeTime);
 dayjs.locale("zh-cn");

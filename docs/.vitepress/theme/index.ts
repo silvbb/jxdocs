@@ -1,21 +1,30 @@
 import DefaultTheme from "vitepress/theme";
 import MyLayout from "../theme/layouts/MyLayout/MyLayout.vue";
-import FeishuLayout from "../theme/layouts/FeishuLayout/feishu-layout.vue";
 import AIwebLayout from "../theme/layouts/AIwebLayout/aiweb-layout.vue";
 
+import FeishuLayout from "../theme/layouts/FeishuLayout/feishu-layout.vue";
 import RainbowAnimationSwitcher from "./components/unocss/RainbowAnimationSwitcher.vue";
 import UnoCSSLayout from "../theme/layouts/UnoCSSLayout.vue";
 import TwoslashFloatingVue from "@shikijs/vitepress-twoslash/client";
-import "@shikijs/vitepress-twoslash/style.css";
-import "./styles/rainbow.css";
-import "./styles/overrides.css";
+
+import giscusTalk from "vitepress-plugin-comment-with-giscus";
+import { inBrowser, useData, useRoute } from "vitepress";
+import mediumZoom from "medium-zoom";
+import { nextTick, watch, ref, computed, provide } from "vue";
+
 import "uno.css";
+import "./styles/rainbow.css";
 import "virtual:group-icons.css";
+// import "./styles/myrainbow.css";
+import "./styles/index.css";
+import "./styles/css/zoom.css";
+// import "./styles/vars.css";
+// import "./styles/overrides.css";
+import "@shikijs/vitepress-twoslash/style.css";
+
 // import '@iconify/css'
 //  import 'group-icons.css'
 
-import "./styles/vars.css";
-import "@shikijs/vitepress-twoslash/style.css";
 // import './styles/custom.css';
 // import "./styles/css/style.css";
 // import "./styles/css/other.scss";
@@ -23,10 +32,10 @@ import "@shikijs/vitepress-twoslash/style.css";
 // import "./styles/css/my_style.css";
 // import "./styles/site.scss";
 
-import { customConfigProvider } from "./configProvider";
-import { useRoute, useData } from "vitepress";
+import { customConfigProvider, useCurrentRainbowKey } from "./configProvider";
+
 import { Theme } from "vitepress";
-import { watch, ref, computed } from "vue";
+
 import { h } from "vue";
 import siteList from "./components/site/siteList.vue";
 import siteFooter from "./components/site/siteFooter.vue";
@@ -39,9 +48,8 @@ console.log("index.js开始加载主题配置");
 // 为AIwebLayout也应用customConfigProvider
 // const wrappedAIwebLayout = customConfigProvider(AIwebLayout);
 const wrappedFeishuLayout = customConfigProvider(FeishuLayout);
+const wrappedUnocssLayout = customConfigProvider(UnoCSSLayout);
 // const wrappedMyLayout = customConfigProvider(MyLayout);
-
-let homePageStyle: HTMLStyleElement | undefined;
 
 export default {
   extends: DefaultTheme,
@@ -49,9 +57,8 @@ export default {
   //Layout:customConfigProvider(FeishuLayout),
   // 自定义布局配置
   Layout: () => {
-    //自定义class标签  pageClass: site-layout 默认是：layoutClass: site-page
+    //自定义class标签 pageClass: site-layout 默认是：layoutClass: site-page
     const props: { class?: string } = {};
-    // 获取 frontmatter
     const { frontmatter } = useData();
 
     // 如果 frontmatter 指定了 layout: feishu
@@ -67,10 +74,17 @@ export default {
         "doc-after": () => h(siteFooter),
       });
     }
-    //return h(customConfigProvider(FeishuLayout))
-    return h(UnoCSSLayout);
+
+    // 否则使用默认布局
+    return h(wrappedUnocssLayout);
   },
 
+  /**
+   * Vue 应用的初始化和组件渲染的顺序：
+        1. 首先，VitePress 会创建 Vue 应用实例
+        2. 然后调用 enhanceApp 来增强应用（注册组件、插件等）
+        3. 最后才会渲染 Layout 组件
+   */
   enhanceApp({ app, router }) {
     console.log("VitePress应用增强开始");
     app.component("RainbowAnimationSwitcher", RainbowAnimationSwitcher);
@@ -80,20 +94,113 @@ export default {
 
     if (typeof window === "undefined") return;
 
-    console.log("当前路径为：" + location.pathname);
+    // 使用标志变量控制
+    let hasLogged = false;
     watch(
       () => router.route.data.relativePath,
-      () => updateHomePageStyle(location.pathname === "/"),
+      () => {
+        if (!hasLogged) {
+          console.log("测试1当前路径为：" + location.pathname);
+          hasLogged = true;
+        }
+      },
       { immediate: true },
     );
 
+    // 使用全局 mixin 在组件挂载后执行逻辑
+    app.mixin({
+      mounted() {
+        // 只在根组件执行一次
+        if (this.$root === this) {
+          try {
+            console.log("测试2 全局 mixin 当前路径为：" + location.pathname);
+          } catch (e) {
+            console.error("初始化失败:", e);
+          }
+        }
+      },
+    });
+
     console.log("VitePress应用增强完成");
   },
+  setup() {
+    // 获取前言和路由
+    const { frontmatter } = useData();
+    const route = useRoute();
+    watch(
+      () => route.path,
+      () =>
+        nextTick(() => {
+          if (inBrowser) {
+            const content = document.querySelector("#VPContent");
+            if (content) {
+              // 添加判断，确保content存在
+              let images = content.querySelectorAll("img");
+              if (images.length > 0) {
+                console.log(`找到 ${images.length} 张图片，添加缩放效果`);
+                images.forEach((image) => {
+                  image.classList.add("zoom-image");
+                });
+                // 创建新的zoom实例
+                mediumZoom(".zoom-image", {
+                  margin: 24,
+                  background: "rgba(0,0,0,0.6)",
+                  scrollOffset: 40,
+                });
+              } else {
+                console.log("当前页面没有找到图片");
+              }
+            } else {
+              console.log("未找到 #VPContent 元素");
+            }
+          }
+        }),
+      { immediate: true },
+    ); // 评论组件 - https://giscus.app/
+    giscusTalk(
+      {
+        repo: "LetTTGACO/elog-docs",
+        repoId: "R_kgDOIh13_Q",
+        category: "General", // 默认: `General`
+        categoryId: "DIC_kwDOIh13_c4CbnHJ",
+        mapping: "pathname", // 默认: `pathname`
+        inputPosition: "top", // 默认: `top`
+        lang: "zh-CN", // 默认: `zh-CN`
+        lightTheme: "light", // 默认: `light`
+        darkTheme: "transparent_dark", // 默认: `transparent_dark`
+        // ...
+      },
+      {
+        frontmatter,
+        route,
+      },
+      // 是否全部页面启动评论区。
+      // 默认为 true，表示启用，此参数可忽略；
+      // 如果为 false，表示不启用。
+      // 可以在页面使用 `comment: true` 前言单独启用
+      true,
+    );
+    if (inBrowser) {
+      if (import.meta.env.MODE === "production") {
+        import("aegis-web-sdk").then(({ default: Aegis }) => {
+          new Aegis({
+            id: "8legRCovo1V8QOQrYm",
+            reportApiSpeed: true,
+            reportAssetSpeed: true,
+            spa: true,
+            hostUrl: "https://rumt-zh.com",
+          });
+        });
+      }
+    }
+  },
 } satisfies Theme;
+
 //as Theme;
 // export default theme;
 // 添加这行代码，在浏览器控制台中显示日志
 
+//检测用户的浏览器类型，并在 HTML 根元素（ <html> ）上添加对应的 CSS 类名
 if (typeof window !== "undefined") {
   // detect browser, add to class for conditional styling
   const browser = navigator.userAgent.toLowerCase();
@@ -103,37 +210,6 @@ if (typeof window !== "undefined") {
     document.documentElement.classList.add("browser-firefox");
   else if (browser.includes("safari"))
     document.documentElement.classList.add("browser-safari");
-}
-
-// Speed up the rainbow animation on home page
-function updateHomePageStyle(value: boolean) {
-  console.log("updateHomePageStyle:", value, location.pathname, homePageStyle);
-  //只在首页（ location.pathname === '/' ）时启用
-  if (value) {
-    if (homePageStyle) return;
-
-    /**  让整个页面背景颜色产生彩虹渐变效果
-     *  1. :root - 选择文档的根元素（在 HTML 中就是 <html> 元素）
-        2. animation: rainbow 12s linear infinite; 分解为：
-          - rainbow : 动画名称，对应 rainbow.css 中定义的关键帧动画
-          - 12s : 动画持续时间为 12 秒
-          - linear : 动画的时间函数，线性变化（匀速）
-          - infinite : 动画无限循环播放
-          这个动画会在根元素上应用彩虹效果，使整个页面背景产生渐变色变化，每12秒完成一次循环，并且会永久持续下去。
-     *
-     */
-    homePageStyle = document.createElement("style");
-    homePageStyle.innerHTML = `
-    :root {
-      animation: rainbow 12s linear infinite;
-    }`;
-    document.body.appendChild(homePageStyle);
-  } else {
-    if (!homePageStyle) return;
-
-    homePageStyle.remove();
-    homePageStyle = undefined;
-  }
 }
 
 console.log("主题文件加载完成");

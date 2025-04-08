@@ -4,6 +4,7 @@ import footnote from "markdown-it-footnote";
 import { transformerTwoslash } from "@shikijs/vitepress-twoslash";
 import { groupIconMdPlugin } from "vitepress-plugin-group-icons";
 import { createFileSystemTypesCache } from "@shikijs/vitepress-twoslash/cache-fs";
+import { withMermaid } from "vitepress-plugin-mermaid";
 
 //代码使用 createRequire 创建了一个基于当前模块 URL 的 require 函数，
 import { createRequire } from "module";

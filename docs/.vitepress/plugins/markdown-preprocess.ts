@@ -10,7 +10,7 @@ export function markdownPreprocessPlugin(): Plugin {
     enforce: "pre",
     transform(code: string, id: string) {
       if (id.endsWith(".md")) {
-        console.log(`特殊处理Markdown文件: ${id}`);
+        // console.log(`特殊处理Markdown文件: ${id}`);
 
         // 处理特殊指令
         code = code.replace(

@@ -8,7 +8,7 @@ export const head: HeadConfig[] = [
     "meta",
     { name: "keywords", content: "铁骑的知识库, 知识库, 博客, DavidFiliron" },
   ],
-
+  //添加 Open Graph 协议相关的元标签（用于社交媒体分享时的展示）：
   ["meta", { name: "HandheldFriendly", content: "True" }],
   ["meta", { name: "MobileOptimized", content: "320" }],
   ["meta", { name: "theme-color", content: "#3c8772" }],

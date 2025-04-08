@@ -91,7 +91,7 @@ export function debugPlugin(): Plugin {
               const pageData = JSON.parse(jsonStr);
               const title = pageData.title || "无标题(从pageData)";
               logger(
-                `[VitePress] 处理文件: ${id} | 文章标题(从pageData): ${title}`,
+                `[VitePress transform] 处理文件: ${id} | 文章标题(从pageData): ${title}`,
               );
               return null;
             } catch (jsonError) {

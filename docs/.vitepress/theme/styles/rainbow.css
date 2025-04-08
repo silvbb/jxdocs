@@ -670,10 +670,19 @@ html:not(.rainbow) {
 } */
 
 /* 添加以下样式，确保颜色变化能应用到更多元素 */
+
 :root {
   --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: -webkit-linear-gradient(120deg, var(--vp-c-brand-1), var(--vp-c-brand-next));
-  --vp-home-hero-image-background-image: linear-gradient(-45deg, var(--vp-c-brand-1) 30%, var(--vp-c-brand-next));
+  --vp-home-hero-name-background: -webkit-linear-gradient(
+    120deg,
+    var(--vp-c-brand-1),
+    var(--vp-c-brand-next)
+  );
+  --vp-home-hero-image-background-image: linear-gradient(
+    -45deg,
+    var(--vp-c-brand-1) 30%,
+    var(--vp-c-brand-next)
+  );
 }
 
 /* 让更多元素响应动画 */
@@ -695,3 +704,36 @@ html:not(.rainbow) {
   background: var(--vp-c-brand-1);
 }
 
+/* 只有当添加了 rainbow-enabled 类时才应用彩虹动画 */
+.rainbow-enabled:root {
+  animation: rainbow 12s linear infinite;
+}
+
+/* 确保首页内容在彩虹模式下可见 */
+.rainbow-enabled .VPHome .VPHero .container,
+.rainbow-enabled .VPHome .VPFeatures .container {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* 文字彩虹效果 */
+.rainbow-enabled .VPHero .name,
+.rainbow-enabled .VPHero .text,
+.rainbow-enabled .VPHero .tagline {
+  background-image: -webkit-linear-gradient(
+    120deg,
+    var(--vp-c-brand-1),
+    var(--vp-c-brand-next)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.3s ease;
+}
+
+/* 按钮彩虹效果 */
+.rainbow-enabled .VPButton.brand {
+  background: var(--vp-c-brand-1);
+  border-color: var(--vp-c-brand-1);
+  transition: all 0.3s ease;
+}
