@@ -649,7 +649,7 @@
   }
 }
 
-:root {
+/* :root {
   --vp-c-brand-1: #00a98e;
   --vp-c-brand-light: #4ad1b4;
   --vp-c-brand-lighter: #78fadc;
@@ -667,4 +667,100 @@ html:not(.rainbow) {
   --vp-c-brand-darker: #005d47;
   --vp-c-brand-next: #009ff7;
   animation: none !important;
+} */
+
+/* 添加以下样式，确保颜色变化能应用到更多元素 */
+
+:root {
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: -webkit-linear-gradient(
+    120deg,
+    var(--vp-c-brand-1),
+    var(--vp-c-brand-next)
+  );
+  --vp-home-hero-image-background-image: linear-gradient(
+    -45deg,
+    var(--vp-c-brand-1) 30%,
+    var(--vp-c-brand-next)
+  );
+}
+
+/* 添加以下样式确保 logo 在所有情况下都可见 */
+.VPNav .VPNavBar .VPNavBarTitle .logo,
+.VPNav .VPNavBar .VPNavBarTitle .title {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* 确保首页图片和背景可见 */
+.VPHome .VPHero .image-container,
+.VPHome .VPHero .image,
+.VPHome .VPHero .image-bg {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  z-index: 1;
+}
+
+/* 确保 SVG 图像可见 */
+img[src$=".svg"] {
+  display: inline-block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* 让更多元素响应动画 */
+.VPHero .name,
+.VPHero .text,
+.VPHero .tagline {
+  background-image: var(--vp-home-hero-name-background);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: var(--vp-home-hero-name-color);
+}
+
+/* 让更多元素响应动画 */
+.VPHero .image-bg {
+  background-image: var(--vp-home-hero-image-background-image);
+  filter: blur(40px); /* 给背景添加40像素的模糊效果，创造出柔和的光晕效果 */
+  opacity: 1 !important; /* 强制设置不透明度为100%，确保背景可见 */
+  visibility: visible !important; /* 强制设置可见性为可见，防止被其他样式隐藏 */
+}
+
+.VPButton.brand {
+  background: var(--vp-c-brand-1);
+}
+
+/* 只有当添加了 rainbow-enabled 类时才应用彩虹动画 */
+.rainbow-enabled:root {
+  animation: rainbow 12s linear infinite;
+}
+
+/* 确保首页内容在彩虹模式下可见 */
+.rainbow-enabled .VPHome .VPHero .container,
+.rainbow-enabled .VPHome .VPFeatures .container {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* 文字彩虹效果 */
+.rainbow-enabled .VPHero .name,
+.rainbow-enabled .VPHero .text,
+.rainbow-enabled .VPHero .tagline {
+  background-image: -webkit-linear-gradient(
+    120deg,
+    var(--vp-c-brand-1),
+    var(--vp-c-brand-next)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.3s ease;
+}
+
+/* 按钮彩虹效果 */
+.rainbow-enabled .VPButton.brand {
+  background: var(--vp-c-brand-1);
+  border-color: var(--vp-c-brand-1);
+  transition: all 0.3s ease;
 }

@@ -12,16 +12,15 @@ import { inBrowser, useData, useRoute } from "vitepress";
 import mediumZoom from "medium-zoom";
 import { nextTick, watch, ref, computed, provide } from "vue";
 
-import "uno.css";
-import "./styles/rainbow.css";
-import "virtual:group-icons.css";
-// import "./styles/myrainbow.css";
-import "./styles/index.css";
-import "./styles/css/zoom.css";
-// import "./styles/vars.css";
-// import "./styles/overrides.css";
 import "@shikijs/vitepress-twoslash/style.css";
 
+import "./styles/rainbow.css";
+import "./styles/vars.css";
+import "./styles/overrides.css";
+import "uno.css";
+import "virtual:group-icons.css";
+
+import "./styles/css/zoom.css";
 // import '@iconify/css'
 //  import 'group-icons.css'
 
@@ -39,7 +38,7 @@ import { Theme } from "vitepress";
 import { h } from "vue";
 import siteList from "./components/site/siteList.vue";
 import siteFooter from "./components/site/siteFooter.vue";
-
+let homePageStyle: HTMLStyleElement | undefined;
 /*
  *   index.js 只负责处理布局和主题功能的扩展
  */
@@ -94,16 +93,9 @@ export default {
 
     if (typeof window === "undefined") return;
 
-    // 使用标志变量控制
-    let hasLogged = false;
     watch(
       () => router.route.data.relativePath,
-      () => {
-        if (!hasLogged) {
-          console.log("测试1当前路径为：" + location.pathname);
-          hasLogged = true;
-        }
-      },
+      () => updateHomePageStyle(location.pathname === "/"),
       { immediate: true },
     );
 
@@ -210,6 +202,25 @@ if (typeof window !== "undefined") {
     document.documentElement.classList.add("browser-firefox");
   else if (browser.includes("safari"))
     document.documentElement.classList.add("browser-safari");
+}
+
+// Speed up the rainbow animation on home page
+function updateHomePageStyle(value: boolean) {
+  if (value) {
+    if (homePageStyle) return;
+
+    homePageStyle = document.createElement("style");
+    homePageStyle.innerHTML = `
+    :root {
+      animation: rainbow 12s linear infinite;
+    }`;
+    document.body.appendChild(homePageStyle);
+  } else {
+    if (!homePageStyle) return;
+
+    homePageStyle.remove();
+    homePageStyle = undefined;
+  }
 }
 
 console.log("主题文件加载完成");

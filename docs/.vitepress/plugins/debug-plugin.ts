@@ -68,7 +68,10 @@ export function debugPlugin(): Plugin {
     name: "vitepress-debug",
     configResolved(config) {
       logger("\n[VitePress] 配置解析完成");
-      logger("[VitePress] 工作目录:", process.cwd());
+      // 修改这一行，将第二个参数改为对象形式
+      logger("[VitePress] 工作目录:", { prefix: "" });
+      // 添加一行单独输出当前工作目录
+      console.log(`Current directory: ${process.cwd()}`);
     },
     transform(code, id) {
       if (id.endsWith(".md")) {
