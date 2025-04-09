@@ -13,6 +13,7 @@ import mediumZoom from "medium-zoom";
 import { nextTick, watch, ref, computed, provide } from "vue";
 
 import "@shikijs/vitepress-twoslash/style.css";
+import "./styles/css/zoom.css";
 // 确保CSS加载顺序正确，将关键样式提前
 import "./styles/rainbow.css";
 import "./styles/vars.css";
@@ -20,8 +21,8 @@ import "./styles/overrides.css";
 // 确保UnoCSS和图标CSS在其他样式之后加载
 import "uno.css";
 import "virtual:group-icons.css";
+import "./styles/production-fix.css";
 
-// import "./styles/css/zoom.css";
 // import '@iconify/css'
 //  import 'group-icons.css'
 
