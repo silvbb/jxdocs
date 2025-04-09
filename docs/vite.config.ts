@@ -10,7 +10,8 @@ export default defineConfig({
   //控制依赖预构建的关键部分
   optimizeDeps: {
     //exclude 数组：指定哪些依赖不需要被预构建
-    // exclude: ["vitepress"],
+    exclude: ["vue"], // 排除Vue优化
+    //  exclude: ["vitepress"],
     //include 数组：指定哪些依赖需要被预构建
     // include: [
     //   "vue",
@@ -66,6 +67,7 @@ export default defineConfig({
     minify: "esbuild", //minify: "terser",
 
     assetsInlineLimit: 0, // 禁用小资源内联，确保所有资源都作为单独的文件
+    cssCodeSplit: false, // 禁用CSS代码分割
     rollupOptions: {
       output: {
         manualChunks: undefined, // 禁用手动分块

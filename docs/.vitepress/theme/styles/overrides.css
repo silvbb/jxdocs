@@ -97,27 +97,3 @@ table {
 .dark::view-transition-old(root) {
   z-index: 9999;
 }
-
-/* 确保 Hero 图片容器正确显示 */
-.VPHero .image {
-  display: block !important;
-  position: relative !important;
-  margin: 0 auto !important;
-  max-width: 320px !important;
-}
-
-.VPHero .image-container {
-  position: relative !important;
-  margin: 0 auto !important;
-  width: 100% !important;
-  height: 100% !important;
-}
-
-/* 确保 logo 图片显示 */
-.VPHero .VPImage.image-src {
-  display: block !important;
-  max-width: 100% !important;
-  height: auto !important;
-  margin: 0 auto !important;
-  z-index: 2 !important; /* 确保 logo 在背景上方 */
-}
