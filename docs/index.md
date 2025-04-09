@@ -5,7 +5,7 @@ RAINBOW_ANIMATION: false
 
 hero:
   image:
-    src: /logo.svg
+    src: /svg/2890568_ai_artificial intelligence_automaton_brain_electronics_icon.svg
     alt: UnoCSS
   name: JWisdom的智能体
   text: 杰出 & 多维 & 智能体

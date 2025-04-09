@@ -10,7 +10,7 @@ export default defineConfig({
   //控制依赖预构建的关键部分
   optimizeDeps: {
     //exclude 数组：指定哪些依赖不需要被预构建
-    exclude: ["vue"], // 排除Vue优化
+    // exclude: ["vue"], // 排除Vue优化
     //  exclude: ["vitepress"],
     //include 数组：指定哪些依赖需要被预构建
     // include: [
