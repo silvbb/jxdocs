@@ -67,13 +67,13 @@ export default {
     }
 
     /* 添加自定义 class */
-    if (frontmatter.value?.sitelayoutClass) {
-      props.class = frontmatter.value.sitelayoutClass;
-      return h(DefaultTheme.Layout, props, {
-        // 自定义文档底部
-        "doc-after": () => h(siteFooter),
-      });
-    }
+    // if (frontmatter.value?.sitelayoutClass) {
+    //   props.class = frontmatter.value.sitelayoutClass;
+    //   return h(DefaultTheme.Layout, props, {
+    //     // 自定义文档底部
+    //     "doc-after": () => h(siteFooter),
+    //   });
+    // }
 
     // 否则使用默认布局
     return h(wrappedUnocssLayout);
@@ -115,6 +115,77 @@ export default {
     });
 
     console.log("VitePress应用增强完成");
+  },
+  setup() {
+    // 获取前言和路由
+    const { frontmatter } = useData();
+    const route = useRoute();
+    watch(
+      () => route.path,
+      () =>
+        nextTick(() => {
+          if (inBrowser) {
+            const content = document.querySelector("#VPContent");
+            if (content) {
+              // 添加判断，确保content存在
+              let images = content.querySelectorAll("img");
+              if (images.length > 0) {
+                console.log(`找到 ${images.length} 张图片，添加缩放效果`);
+                images.forEach((image) => {
+                  image.classList.add("zoom-image");
+                });
+                // 创建新的zoom实例
+                mediumZoom(".zoom-image", {
+                  margin: 24,
+                  background: "rgba(0,0,0,0.6)",
+                  scrollOffset: 40,
+                });
+              } else {
+                console.log("当前页面没有找到图片");
+              }
+            } else {
+              console.log("未找到 #VPContent 元素");
+            }
+          }
+        }),
+      { immediate: true },
+    ); // 评论组件 - https://giscus.app/
+    giscusTalk(
+      {
+        repo: "LetTTGACO/elog-docs",
+        repoId: "R_kgDOIh13_Q",
+        category: "General", // 默认: `General`
+        categoryId: "DIC_kwDOIh13_c4CbnHJ",
+        mapping: "pathname", // 默认: `pathname`
+        inputPosition: "top", // 默认: `top`
+        lang: "zh-CN", // 默认: `zh-CN`
+        lightTheme: "light", // 默认: `light`
+        darkTheme: "transparent_dark", // 默认: `transparent_dark`
+        // ...
+      },
+      {
+        frontmatter,
+        route,
+      },
+      // 是否全部页面启动评论区。
+      // 默认为 true，表示启用，此参数可忽略；
+      // 如果为 false，表示不启用。
+      // 可以在页面使用 `comment: true` 前言单独启用
+      true,
+    );
+    if (inBrowser) {
+      if (import.meta.env.MODE === "production") {
+        import("aegis-web-sdk").then(({ default: Aegis }) => {
+          new Aegis({
+            id: "8legRCovo1V8QOQrYm",
+            reportApiSpeed: true,
+            reportAssetSpeed: true,
+            spa: true,
+            hostUrl: "https://rumt-zh.com",
+          });
+        });
+      }
+    }
   },
 } satisfies Theme;
 
