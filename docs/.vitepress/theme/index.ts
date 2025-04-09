@@ -21,7 +21,7 @@ import "./styles/overrides.css";
 import "uno.css";
 import "virtual:group-icons.css";
 
-import "./styles/css/zoom.css";
+// import "./styles/css/zoom.css";
 // import '@iconify/css'
 //  import 'group-icons.css'
 
