@@ -7,7 +7,6 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    2: typeof import('./.vitepress/theme/components/feishu/ArticleList copy 2.vue')['default']
     ACard: typeof import('@arco-design/web-vue')['Card']
     ACol: typeof import('@arco-design/web-vue')['Col']
     AIWebSites: typeof import('./.vitepress/theme/components/aiweb/AIWebSites.vue')['default']
@@ -32,7 +31,6 @@ declare module 'vue' {
     ChatDialog: typeof import('./.vitepress/theme/components/ChatDialog.vue')['default']
     'ChatDialog copy': typeof import('./.vitepress/theme/components/ChatDialog copy.vue')['default']
     Codeshow: typeof import('./.vitepress/theme/components/codeshow.vue')['default']
-    copy: typeof import('./.vitepress/theme/components/Tag copy.vue')['default']
     Feishu: typeof import('./.vitepress/theme/components/feishu.vue')['default']
     FeishuContent: typeof import('./.vitepress/theme/components/feishu/FeishuContent.vue')['default']
     FeishuNav: typeof import('./.vitepress/theme/components/feishu/FeishuNav.vue')['default']

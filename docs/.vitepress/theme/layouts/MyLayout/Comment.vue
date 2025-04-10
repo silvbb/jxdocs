@@ -27,16 +27,16 @@ const { page } = useData();
 let gitalk;
 if (type.value && type.value == "gitalk") {
   gitalk = new Gitalk({
-    clientID: "1de126ce1fbdbe049709",
-    clientSecret: "035fe49874a43e5cefc28a99b7e40b1925319c62",
+    clientID: "Ov23li40gffkYiiTimtT",
+    clientSecret: "1053b94f8e31fc7f842ef8c17f55ba327e464893",
     repo: "silvbb.github.io",
     owner: "silvbb",
     admin: ["silvbb"],
     id: md5(page.value.relativePath),
     language: "zh-CN",
     distractionFreeMode: false,
-    // 默认: https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token
-    proxy: "https://vercel.silvbb.top/github_access_token",
+    // 反向代理默认: https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token
+    // proxy: "https://vercel.silvbb.top/github_access_token",
   });
 }
 
