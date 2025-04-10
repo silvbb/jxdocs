@@ -4,6 +4,10 @@ node_modules
 **/node_modules
 node_modules/
 node_modules.bak/
+# 忽略所有符号链接
+*/**/@eaDir
+**/*.lnk
+
 .idea
 .elog.env
 .DS_Store
