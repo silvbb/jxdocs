@@ -47,5 +47,6 @@ export default defineConfig({
     //   }
     // }),
   ],
+  //启用了 transformerDirectives 转换器，支持在 CSS 中使用 @apply 、 @screen 等指令。
   transformers: [transformerDirectives()],
 });
