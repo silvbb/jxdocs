@@ -10,3 +10,5 @@ link.sh
 ssl/
 logs/
 /vitepress-debug.log
+/random-read.0.0
+/random-write.0.0
