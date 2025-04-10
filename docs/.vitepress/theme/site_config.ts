@@ -35,10 +35,10 @@ export const SiteConfig = {
     },
   ],
   giscus: {
-    repo: "ftyszyx/feishu-vitepress",
-    repoId: "R_kgDOLgKBTQ",
+    repo: "silvbb/jxdocs-talk",
+    repoId: "R_kgDOOXZbRw",
     category: "General",
-    categoryId: "DIC_kwDOLgKBTc4CjQRM",
+    categoryId: "DIC_kwDOOXZbR84Co-R3",
     data_mapping: "pathname",
   },
   //bytefuse
@@ -50,6 +50,6 @@ export const SiteConfig = {
     const hostname = window.location.hostname;
     return get_uami_id_by_host(hostname);
   },
-  github_url: "https://github.com/ftyszyx",
-  twitter_url: "https://twitter.com/zhangyuxin_new",
+  github_url: "https://github.com/silvbb",
+  twitter_url: "https://twitter.com/filiron",
 };
