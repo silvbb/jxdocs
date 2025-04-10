@@ -32,3 +32,6 @@ features:
     title: 智能体
     details: "智能体不只是回应命令，更是预见需求。"
 ---
+
+<!-- 使用聊天组件 -->
+<ChatComponent top="-500px" right="100px" width="400px" />
