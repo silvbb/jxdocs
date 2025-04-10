@@ -9,4 +9,4 @@ link.sh
 .yuque
 ssl/
 logs/
-vitepress-debug.log
+/vitepress-debug.log

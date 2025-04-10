@@ -34,4 +34,4 @@ features:
 ---
 
 <!-- 使用聊天组件 -->
-<ChatComponent top="-500px" right="100px" width="400px" />
+<ChatComponent top="-640px" right="100px" width="400px" />
