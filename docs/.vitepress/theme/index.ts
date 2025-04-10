@@ -153,10 +153,10 @@ export default {
     ); // 评论组件 - https://giscus.app/
     giscusTalk(
       {
-        repo: "LetTTGACO/elog-docs",
-        repoId: "R_kgDOIh13_Q",
+        repo: "silvbb/jxdocs-talk",
+        repoId: "R_kgDOOXZbRw",
         category: "General", // 默认: `General`
-        categoryId: "DIC_kwDOIh13_c4CbnHJ",
+        categoryId: "DIC_kwDOOXZbR84Co-R3",
         mapping: "pathname", // 默认: `pathname`
         inputPosition: "top", // 默认: `top`
         lang: "zh-CN", // 默认: `zh-CN`
