@@ -17,12 +17,24 @@
     "resolveJsonModule": true, // 允许导入 .json 文件
     "baseUrl": ".", // 解析非相对模块名的基准目录
     "jsx": "preserve", // 保留 JSX 以便后续转换
-    "types": ["node", "vite/client", "vitest/importMeta", "unocss/vite"]
+    "types": ["node", "vite/client", "vitest/importMeta", "unocss/vite"],
+    "paths": {
+      "unocss": ["./node_modules/unocss"],
+      "@unocss/*": ["./node_modules/@unocss/*"]
+    },
+    "allowSyntheticDefaultImports": true, // 允许你从没有默认导出的模块中导入默认值
+    "forceConsistentCasingInFileNames": false, // 控制 TypeScript 是否强制文件名大小写一致性检查。
+    "noImplicitAny": false // 允许隐式 any 类型
   },
   "include": [
     "docs/**/*.ts", // 包含 docs 目录下所有 TypeScript 文件
     "docs/**/*.vue", // 包含 docs 目录下所有 Vue 组件文件
-    "docs/**/*.tsx" // 包含 docs 目录下所有 TSX 文件
+    "docs/**/*.tsx", // 包含 docs 目录下所有 TSX 文件
+    "docs/**/*.d.ts",
+    "packages-*/*/src/**/*.ts",
+    "packages-*/*/src/**/*.d.ts",
+    "packages-*/*/src/**/*.tsx",
+    "packages-*/*/src/**/*.vue"
   ],
   "exclude": [
     // 添加排除配置，避免编译输出目录

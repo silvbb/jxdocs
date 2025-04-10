@@ -88,6 +88,7 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
+    "typescript": "catalog:",
     "@iconify-json/tabler": "catalog:",
     "@arco-design/web-vue": "^2.53.3",
     "@iconify-json/carbon": "^1.2.8",
