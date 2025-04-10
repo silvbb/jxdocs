@@ -1,3 +1,7 @@
+# 忽略 node_modules 符号链接
+node_modules
+/node_modules
+**/node_modules
 node_modules/
 node_modules.bak/
 .idea

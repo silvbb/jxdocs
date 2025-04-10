@@ -1,0 +1,6 @@
+@echo off
+chcp 65001 >nul
+echo 正在启动 WSL 端口转发设置...
+powershell -ExecutionPolicy Bypass -File "%~dp0wsl-port-forward.ps1"
+echo 脚本执行完成，按任意键退出...
+pause

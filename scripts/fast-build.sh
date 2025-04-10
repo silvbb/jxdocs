@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # 分离构建和开发环境
+# 已升级为fast-build.js脚本
 
 # 创建临时构建目录
 WSL_BUILD_DIR="/home/jwisdom/temp_build"

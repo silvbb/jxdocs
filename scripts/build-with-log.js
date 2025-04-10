@@ -1,3 +1,7 @@
+/**
+ * build 的创建log日志
+ * 已升级为fast-build.js脚本
+ */
 import { spawn } from "child_process";
 import fs from "fs";
 import path from "path";

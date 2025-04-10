@@ -1,3 +1,7 @@
+/**
+ * 将乱码日志文件变成正常log文件
+ * 已升级为fast-build.js脚本
+ */
 import fs from "fs";
 import iconv from "iconv-lite";
 import path from "path";
