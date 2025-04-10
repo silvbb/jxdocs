@@ -5,6 +5,8 @@ import { groupIconVitePlugin } from "vitepress-plugin-group-icons";
 import { debugPlugin } from "./.vitepress/plugins/debug-plugin";
 import { markdownPreprocessPlugin } from "./.vitepress/plugins/markdown-preprocess";
 import { ArcoResolver } from "unplugin-vue-components/resolvers";
+import fs from "fs";
+import path from "path";
 
 export default defineConfig({
   //控制依赖预构建的关键部分
@@ -83,6 +85,28 @@ export default defineConfig({
   },
   plugins: [
     // buildTimePlugin(), // 添加编译时间统计插件
+    // 添加编译log导出插件
+    // {
+    //   name: "vitepress-log-output",
+    //   closeBundle() {
+    //     const logDir = path.resolve(__dirname, "../logs");
+    //     if (!fs.existsSync(logDir)) {
+    //       fs.mkdirSync(logDir, { recursive: true });
+    //     }
+
+    //     const timestamp = new Date().toISOString().replace(/:/g, "-");
+    //     const logFile = path.join(logDir, `build-${timestamp}.log`);
+
+    //     fs.writeFileSync(
+    //       logFile,
+    //       `VitePress 构建完成时间: ${new Date().toISOString()}\n` +
+    //         // 修改这一行，移除 this.config 的引用
+    //         `输出目录: ${path.resolve(__dirname, "../.vitepress/dist")}\n`,
+    //     );
+
+    //     console.log(`VitePress 构建日志已保存到: ${logFile}`);
+    //   },
+    // },
     debugPlugin(),
     markdownPreprocessPlugin(),
     UnoCSS(),

@@ -73,7 +73,7 @@ export default withMermaid(
           lastmod: pageData.lastUpdated, //页面的最后更新时间
         });
     },
-
+    // 这是 VitePress 特有的钩子，在构建结束时调用
     buildEnd: ({ outDir }) => {
       const sitemap = new SitemapStream({
         hostname: "https://elog.1874.cool/",

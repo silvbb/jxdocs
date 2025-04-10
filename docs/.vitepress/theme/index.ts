@@ -21,7 +21,7 @@ import "./styles/overrides.css";
 // 确保UnoCSS和图标CSS在其他样式之后加载
 import "uno.css";
 import "virtual:group-icons.css";
-import "./styles/production-fix.css";
+// import "./styles/production-fix.css";
 
 // import '@iconify/css'
 //  import 'group-icons.css'

@@ -8,3 +8,5 @@ link.sh
 .npmrc
 .yuque
 ssl/
+logs/
+vitepress-debug.log
