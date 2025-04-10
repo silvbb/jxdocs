@@ -40,14 +40,19 @@ export default defineConfig({
     host: "0.0.0.0", // 绑定到所有网络接口
     port: 4172,
     watch: {
-      // usePolling: true, // 使用轮询方式监听文件变化
+      usePolling: false, // 使用轮询方式监听文件变化
       // interval: 1000, // 轮询间隔（毫秒）
       //   // 监听这些文件的变化
-      //   ignored: [
-      //     "**/node_modules/**",
-      //     // 忽略所有文件，除了 .vitepress/theme 目录下的文件
-      //     "!**/.vitepress/theme/**",
-      //   ],
+      ignored: [
+        "**/node_modules/**",
+        "**/.git/**",
+        "**/dist/**",
+        "**/.vite_cache/**",
+        "**/*.log",
+        "**/random-*.0.0",
+        // 忽略所有文件，除了 .vitepress/theme 目录下的文件
+        "!**/.vitepress/theme/**",
+      ],
     },
     hmr: {
       overlay: false,

@@ -1,9 +1,11 @@
 node_modules/
+node_modules.bak/
 .idea
 .elog.env
 .DS_Store
 dist/
 cache/
+cache.bak/
 link.sh
 .npmrc
 .yuque
@@ -12,3 +14,5 @@ logs/
 /vitepress-debug.log
 /random-read.0.0
 /random-write.0.0
+.vite_cache/
+.vite_cache.bak/
