@@ -132,6 +132,11 @@ export const nav: DefaultTheme.Config["nav"] = [
     items: [
       { text: "关于知识库", link: "/about/index", activeMatch: "/about/index" },
       { text: "关于我", link: "/about/me", activeMatch: "/about/me" },
+      {
+        text: "jxlucky",
+        link: "https://jxlucky.jwisdom.fun/jxlucky",
+        activeMatch: "/about/jxlucky",
+      },
       { text: "资源导航", link: "/site/index", activeMatch: "/site/" },
       {
         component: "RainbowAnimationSwitcher",
